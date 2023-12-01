@@ -1,0 +1,16 @@
+{
+    "name": "urpapuh/shop",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Shop\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "UrPapuh",
+            "email": "andrewgr073@gmail.com"
+        }
+    ],
+    "require": {}
+}
