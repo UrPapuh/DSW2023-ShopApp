@@ -48,58 +48,64 @@
   <link rel="stylesheet" href="../src/utils/style.css">
 </head>
 <body>
-  <h1>Lista de Productos</h1>
-  <a href="basket.php">
-    <button>&#x1F6D2;</button>
-  </a>
+  <header>
+    <nav>
+      <a href="basket.php">
+        <button>&#x1F6D2;</button>
+      </a>
+    </nav>
+    <h1>Lista de Productos</h1>
+  </header>
 <?php
-  $stmt = $link->stmt_init();
+    $stmt = $link->stmt_init();
 
-  $stmt->prepare($sql);
-  $stmt->execute();
+    $stmt->prepare($sql);
+    $stmt->execute();
 
-  $result = $stmt->get_result();
-                                              
-  if ($result->num_rows > 0) {                            
+    $result = $stmt->get_result();
+                                                
+    if ($result->num_rows > 0) {                            
 ?>
-    <table>
-        <thead>
-            <tr>
-                <th>
-                  <a href="index.php?order=name">name</a>
-                </th>
-                <th>
-                  <a href="index.php?order=price">price</a>
-                </th>
-                <th>
-                  <a href="index.php?order=amount">amount</a>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php            
-              while ($product = $result->fetch_array()) {
-            ?>
+      <table>
+          <thead>
               <tr>
-                  <td><?=$product['name']?></td>
-                  <td><?=$product['price']?>€</td>
-                  <td><?=$product['amount']?></td>
-                  <td class="actions">                            
-                      <a class="button" href="index.php?action=add&&product=<?=$product['id']?>">
-                          <button>+</button>
-                      </a>               
-                  </td>
+                  <th>
+                    <a href="index.php?order=name">name</a>
+                  </th>
+                  <th>
+                    <a href="index.php?order=price">price</a>
+                  </th>
+                  <th>
+                    <a href="index.php?order=amount">amount</a>
+                  </th>
+                  <th></th>
               </tr>
-            <?php
-            }
-              $result->free();
-            ?>
-        </tbody>
-    </table>
+          </thead>
+          <tbody>
+              <?php            
+                while ($product = $result->fetch_array()) {
+                  if ($product['amount'] > 0) {
+              ?>
+                    <tr>
+                        <td><?=$product['name']?></td>
+                        <td><?=$product['price']?>€</td>
+                        <td><?=$product['amount']?></td>
+                        <td class="actions">                            
+                            <a class="button" href="index.php?action=add&&product=<?=$product['id']?>">
+                                <button>+</button>
+                            </a>               
+                        </td>
+                    </tr>
+              <?php
+                }
+              }
+                $result->free();
+              ?>
+          </tbody>
+      </table>
 <?php
-  }                                       
-  $stmt->close();
+    }                                       
+    $stmt->close();
 ?>
 </body>
 </html>

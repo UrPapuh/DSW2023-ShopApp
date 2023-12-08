@@ -1,5 +1,7 @@
 table {
   border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
 }
 td, th {
   border: solid black 1px;
@@ -11,4 +13,14 @@ tr:nth-child(even) {
 }
 thead {
   background-color: grey;
+}
+nav {
+  text-align: right;
+}
+header h1 {
+  text-align: center;
+}
+#total {
+  text-align: right;
+  font-weight: bold;
 }
